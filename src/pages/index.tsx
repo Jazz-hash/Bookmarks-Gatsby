@@ -23,59 +23,68 @@ const ADD_BOOKMARK = gql`
   }
 `
 export default function Home() {
-  console.log(process.env)
   const { data, loading, error } = useQuery(GET_BOOKMARKS)
   const [addBookmark] = useMutation(ADD_BOOKMARK)
   let titleField, urlField
   const handleSubmit = () => {
-    addBookmark({
-      variables: {
-        title: titleField.value,
-        url: urlField.value,
-      },
-      refetchQueries: [{ query: GET_BOOKMARKS }],
-    })
+    if (titleField.value != "" && urlField.value != "") {
+      addBookmark({
+        variables: {
+          title: titleField.value,
+          url: urlField.value,
+        },
+        refetchQueries: [{ query: GET_BOOKMARKS }],
+      })
+      titleField.value = ""
+      urlField.value = ""
+    } else {
+      alert("Please fill in the required fields !!")
+    }
   }
 
   return (
-    <div className="parent__container">
+    <div>
       <Header />
-      <div className="form_container">
-        <div>
+      <form>
+        <div className="form">
           <TextField
-            variant="filled"
+            variant="outlined"
+            className="input"
             label="Bookmark Title"
+            color="secondary"
+            required={true}
             inputRef={node => (titleField = node)}
           />
-          <br />
-          <br />
 
           <TextField
-            variant="filled"
+            variant="outlined"
+            color="secondary"
+            required={true}
             label="Bookmark Url"
+            className="input"
             inputRef={node => (urlField = node)}
           />
-          <br />
-          <br />
+        </div>
+        <br />
+        <br />
+        <div className="button">
           <Button
             variant="contained"
-            color="primary"
-            fullWidth
+            style={{ width: "620px" }}
+            className="bg"
             onClick={handleSubmit}
           >
             Add Bookmark
           </Button>
         </div>
-      </div>
+      </form>
 
       <br />
       <br />
       <br />
       <br />
-      <h1 style={{ textAlign: "center" }}>
-        <i>Bookmark List</i>
-      </h1>
-      <div className="cards__container">
+      <h1 style={{ textAlign: "center" }}>Bookmarks</h1>
+      <div className="cards">
         {data?.bookmarks.map(({ url, title, id }) => (
           <Card url={url} title={title} id={id} />
         ))}

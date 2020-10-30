@@ -1,12 +1,30 @@
-.cards__container {
+@import url("https://fonts.googleapis.com/css2?family=Acme&display=swap");
+* {
+  font-family: "Acme", sans-serif !important;
+}
+
+.cards {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   padding: 3rem;
-  justify-content: space-around;
 }
-.form_container {
+.form {
   display: flex;
   margin-top: 3rem;
   justify-content: center;
+}
+.form > .input {
+  margin-left: 10px;
+  width: 300px;
+  margin-right: 10px;
+}
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bg {
+  background-color: rgb(192, 11, 11) !important;
+  color: white !important;
 }

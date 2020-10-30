@@ -1,7 +1,8 @@
 .card {
-  padding: 1rem !important;
-  background-color: #f1f1f1;
-  margin: 1rem !important;
-  border-bottom: 0.6rem solid blue;
-  border-radius: 1rem;
+  padding: 20px !important;
+  margin: 10px !important;
+  background-color: rgb(201, 55, 55);
+  color: white !important;
+  width: 300px;
+  /* border-right: ; */
 }
